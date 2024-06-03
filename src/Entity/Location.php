@@ -25,17 +25,17 @@ class Location
     #[ORM\Column(type: 'date', nullable: true)]
     private ?\DateTimeInterface $returnDate = null;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    #[ORM\Column(type: 'float')]
     #[Assert\NotBlank]
     private ?float $totalAmount = null;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 0, nullable: true)]
+    #[ORM\Column(type: 'float', nullable: true)]
     private ?float $transportPrice = null;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 0, nullable: true)]
+    #[ORM\Column(type: 'float', nullable: true)]
     private ?float $guardPrice = null;
 
-    #[ORM\Column(type: 'string', columnDefinition: 'ENUM(\'Ongoing\', \'Completed\', \'Cancelled\')')]
+    #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
     private ?string $status = null;
 
@@ -48,6 +48,14 @@ class Location
     private ?\DateTimeInterface $createdAt = null;
 
     // Getters and setters...
+    public function __construct()
+    {
+        $this->setTotalAmount(500);
+        $this->setTransportPrice(100);
+        $this->setGuardPrice(100);
+        $this->setCreatedAt(new \DateTimeImmutable());
+        $this->setLocationDate(new \DateTimeImmutable());
+    }
 
     public function getId(): ?int
     {

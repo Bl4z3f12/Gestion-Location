@@ -24,7 +24,7 @@ class Product
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: 'string', columnDefinition: 'ENUM(\'Available\', \'Rented\', \'UnderMaintenance\')')]
+    #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
     private ?string $status = null;
 

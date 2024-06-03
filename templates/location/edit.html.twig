@@ -3,11 +3,14 @@
 {% block title %}Edit Location{% endblock %}
 
 {% block body %}
-    <h1>Edit Location</h1>
-
-    {{ include('location/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_location_index') }}">back to list</a>
-
-    {{ include('location/_delete_form.html.twig') }}
+    {% embed "tools/card.html.twig" %}
+        {% block card_title %}Create new Location{% endblock %}
+        {% block card_tools %}
+            {{ include('location/_delete_form.html.twig') }}
+            <a href="{{ path('app_location_index') }}">back to list</a>
+        {% endblock %}
+        {% block card_body %}
+            {{ include('location/_form.html.twig', {'button_label': 'Update'}) }}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

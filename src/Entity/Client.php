@@ -41,6 +41,12 @@ class Client
         $this->setCreatedAt(new \DateTimeImmutable());
     }
 
+    public function __toString(): string
+    {
+        return $this->getFullName();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

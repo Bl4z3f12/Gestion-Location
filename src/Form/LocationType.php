@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Entity\Location;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,14 +24,16 @@ class LocationType extends AbstractType
             ->add('totalAmount')
             ->add('transportPrice')
             ->add('guardPrice')
-            ->add('status')
-            ->add('address')
-            ->add('createdAt', null, [
-                'widget' => 'single_text'
+            ->add('status',ChoiceType::class,[
+                'choices' => [
+                    'En cours' => 'En cours',
+                    'Terminé' => 'Terminé',
+                    'Annulé' => 'Annulé'
+                ]
             ])
+            ->add('address')
             ->add('client', EntityType::class, [
                 'class' => Client::class,
-'choice_label' => 'id',
             ])
         ;
     }

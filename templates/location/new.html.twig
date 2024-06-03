@@ -3,9 +3,13 @@
 {% block title %}New Location{% endblock %}
 
 {% block body %}
-    <h1>Create new Location</h1>
-
-    {{ include('location/_form.html.twig') }}
-
-    <a href="{{ path('app_location_index') }}">back to list</a>
+    {% embed "tools/card.html.twig" %}
+        {% block card_title %}Create new Location{% endblock %}
+        {% block card_tools %}
+            <a href="{{ path('app_location_index') }}">back to list</a>
+        {% endblock %}
+        {% block card_body %}
+            {{ include('location/_form.html.twig') }}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
