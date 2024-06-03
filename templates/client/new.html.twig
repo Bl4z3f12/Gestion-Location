@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Client{% endblock %}
+
+{% block body %}
+    {% embed "tools/card.html.twig" %}
+        {% block card_title %}Create new Client{% endblock %}
+
+        {% block card_body %}
+            {{ include('client/_form.html.twig') }}
+
+            <a href="{{ path('app_client_index') }}">back to list</a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

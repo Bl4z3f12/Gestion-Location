@@ -1,25 +1,51 @@
-{# templates/client/index.html.twig #}
-
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Client index{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    {% embed "tools/card.html.twig" %}
+        {% block card_title %}Client index{% endblock %}
+        {% block card_tools %}
+        <a href="{{ path('app_client_new') }}">Create new</a>
+        {% endblock %}
+        {% block card_body %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>FullName</th>
+                        <th>Email</th>
+                        <th>PhoneNumber</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>CreatedAt</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.id }}</td>
+                        <td>{{ client.fullName }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>{{ client.phoneNumber }}</td>
+                        <td>{{ client.address }}</td>
+                        <td>{{ client.city }}</td>
+                        <td>{{ client.createdAt ? client.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a>
+                            <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                {{ form_start(registrationForm) }}
-                    {{ form_row(registrationForm.fullName) }}
-                    {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.phoneNumber) }}
-                    {{ form_row(registrationForm.address) }}
-                    {{ form_row(registrationForm.city) }}
-
-                    <button type="submit" class="btn btn-primary">Register</button>
-                {{ form_end(registrationForm) }}
-            </div>
-        </div>
-    </div>
+       
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
