@@ -1,0 +1,53 @@
+<style>
+    .card {
+        width: 90%;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        margin: 0 auto 1.5rem auto; 
+        background-color: white;
+        margin-top:50px;
+    }
+    
+    .card-header {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+    
+    .card-title {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #333;
+    }
+    
+    .card-tools {
+      margin-left:800px;
+    }
+    
+    .card-body {
+        padding: 1.25rem;
+    }
+    
+
+
+
+    
+</style>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">{% block card_title %}{% endblock %}</h3>
+        <div class="card-tools">
+            {% block card_tools %}{% endblock %}
+        </div>
+    </div>
+    <div class="card-body">
+        {% block card_body %}{% endblock %}
+    </div>    
+    </div>
