@@ -48,10 +48,6 @@ class ClientType extends AbstractType
                     new Length(['max' => 255]),
                 ],
             ])
-            ->add('createdAt', null, [
-                'required' => true,
-                'widget' => 'single_text',
-            ])
         ;
     }
 
