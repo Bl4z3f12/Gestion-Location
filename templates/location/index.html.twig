@@ -9,25 +9,23 @@
             <a href="{{ path('app_location_new') }}">Create new</a>
         {% endblock %}
         {% block card_body %}
-            <table class="table">
+            <table class="table" style="width: 100%;">
                 <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>LocationDate</th>
-                    <th>ReturnDate</th>
-                    <th>TotalAmount</th>
-                    <th>TransportPrice</th>
-                    <th>GuardPrice</th>
+                    <th>Location Date</th>
+                    <th>Return Date</th>
+                    <th>Total Amount</th>
+                    <th>Transport Price</th>
+                    <th>Guard Price</th>
                     <th>Status</th>
                     <th>Address</th>
-                    <th>CreatedAt</th>
-                    <th>actions</th>
+                    <th>Created At</th>
+                    <th colspan="2">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for location in locations %}
                     <tr>
-                        <td>{{ location.id }}</td>
                         <td>{{ location.locationDate ? location.locationDate|date('Y-m-d') : '' }}</td>
                         <td>{{ location.returnDate ? location.returnDate|date('Y-m-d') : '' }}</td>
                         <td>{{ location.totalAmount }}</td>
@@ -38,12 +36,14 @@
                         <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                         <td>
                             <a href="{{ path('app_location_show', {'id': location.id}) }}">show</a>
+                        </td>
+                        <td>
                             <a href="{{ path('app_location_edit', {'id': location.id}) }}">edit</a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="10">no records found</td>
+                        <td colspan="10">No records found</td>
                     </tr>
                 {% endfor %}
                 </tbody>

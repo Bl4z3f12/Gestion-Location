@@ -1,4 +1,25 @@
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="form-row mb-3">
+    {{ form_row(form.locationDate) }}
+    {{ form_row(form.returnDate) }}
+</div>
+<div class="form-row mb-3">
+    {{ form_row(form.totalAmount) }}
+    {{ form_row(form.transportPrice) }}
+    {{ form_row(form.guardPrice) }}
+</div>
+<div class="form-row mb-3">
+    {{ form_row(form.status) }}
+    {{ form_row(form.client) }}
+</div>
+{{ form_row(form.address) }}
+<button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}

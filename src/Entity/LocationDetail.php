@@ -26,7 +26,6 @@ class LocationDetail
     #[Assert\NotBlank]
     private ?int $quantity = null;
 
-    // Getters and setters...
 
     public function getId(): ?int
     {

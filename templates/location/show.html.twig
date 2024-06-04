@@ -3,52 +3,58 @@
 {% block title %}Location{% endblock %}
 
 {% block body %}
-    <h1>Location</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ location.id }}</td>
-            </tr>
-            <tr>
-                <th>LocationDate</th>
-                <td>{{ location.locationDate ? location.locationDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>ReturnDate</th>
-                <td>{{ location.returnDate ? location.returnDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>TotalAmount</th>
-                <td>{{ location.totalAmount }}</td>
-            </tr>
-            <tr>
-                <th>TransportPrice</th>
-                <td>{{ location.transportPrice }}</td>
-            </tr>
-            <tr>
-                <th>GuardPrice</th>
-                <td>{{ location.guardPrice }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ location.status }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ location.address }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_location_index') }}">back to list</a>
-
-    <a href="{{ path('app_location_edit', {'id': location.id}) }}">edit</a>
-
-    {{ include('location/_delete_form.html.twig') }}
+    {% embed "tools/card.html.twig" %}
+        {% block card_title %}Location{% endblock %}
+        {% block card_tools %}
+            <a href="{{ path('app_location_index') }}">back to list</a>
+        {% endblock %}
+        {% block card_body %}
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ location.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>LocationDate</th>
+                        <td>{{ location.locationDate ? location.locationDate|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>ReturnDate</th>
+                        <td>{{ location.returnDate ? location.returnDate|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>TotalAmount</th>
+                        <td>{{ location.totalAmount }}</td>
+                    </tr>
+                    <tr>
+                        <th>TransportPrice</th>
+                        <td>{{ location.transportPrice }}</td>
+                    </tr>
+                    <tr>
+                        <th>GuardPrice</th>
+                        <td>{{ location.guardPrice }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>{{ location.status }}</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td>{{ location.address }}</td>
+                    </tr>
+                    <tr>
+                        <th>CreatedAt</th>
+                        <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="card-body">
+            <a href="{{ path('app_location_edit', {'id': location.id}) }}"class="btn btn-secondary">edit</a>
+            </div>
+            <div class="card-footer">
+            {{ include('location/_delete_form.html.twig') }}
+            </div>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
