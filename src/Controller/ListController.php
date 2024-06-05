@@ -16,7 +16,7 @@ class ListController extends AbstractController
         $this->productRepository = $productRepository;
     }
 
-    #[Route('/list', name: 'app_list')]
+    #[Route('/', name: 'app_list')]
     public function index(): Response
     {
         return $this->render('list/index.html.twig', [
