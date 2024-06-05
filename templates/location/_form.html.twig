@@ -1,25 +1,50 @@
-{% block stylesheets %}
-    {{ encore_entry_link_tags('app') }}
-{% endblock %}
-
 {{ form_start(form) }}
-<div class="form-row mb-3">
-    {{ form_row(form.locationDate) }}
-    {{ form_row(form.returnDate) }}
-</div>
-<div class="form-row mb-3">
-    {{ form_row(form.totalAmount) }}
-    {{ form_row(form.transportPrice) }}
-    {{ form_row(form.guardPrice) }}
-</div>
-<div class="form-row mb-3">
-    {{ form_row(form.status) }}
-    {{ form_row(form.client) }}
-</div>
-{{ form_row(form.address) }}
-<button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    <div class="row mb-3">
+        <div class="col">
+            {{ form_row(form.locationDate) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.returnDate) }}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            {{ form_row(form.totalAmount) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.transportPrice) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.guardPrice) }}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            {{ form_row(form.status) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.client) }}
+        </div>
+    </div>
 
-{% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
-{% endblock %}
+    {{ form_row(form.address) }}
+
+    <div class="mt-2" {{ stimulus_controller('location') }}  data-location-index-value="{{ form.locationDetails|length > 0 ? form.locationDetails|last.vars.name + 1 : 0 }}"
+         data-location-prototype-value="{{ form_widget(form.locationDetails.vars.prototype)|e('html_attr') }}">
+        <div class="row row-cols-1 row-cols-sm-2">
+            <div class="col">
+                <h5 class="my-2">Details of location:</h5>
+            </div>
+            <div class="col text-right">
+                <button type="button" class="btn btn-sm btn-info" {{ stimulus_action('location', 'addCollectionElement') }}>Add detail</button>
+            </div>
+        </div>
+        <div class="mt-2" {{ stimulus_target('location', 'container') }}>
+            {% for detail in form.locationDetails %}
+                {{ form_row(detail) }}
+            {% endfor %}
+        </div>
+    </div>
+
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

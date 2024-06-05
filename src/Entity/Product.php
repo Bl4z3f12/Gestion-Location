@@ -53,6 +53,12 @@ class Product
     public function __construct()
     {
         $this->LocationDetail = new ArrayCollection();
+        $this->setUpdatedAt(new \DateTimeImmutable());
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 
     // Getters and setters...

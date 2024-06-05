@@ -7,6 +7,8 @@ use App\Entity\Location;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,9 +33,16 @@ class LocationType extends AbstractType
                     'Annulé' => 'Annulé'
                 ]
             ])
-            ->add('address')
+            ->add('address',TextareaType::class)
             ->add('client', EntityType::class, [
                 'class' => Client::class,
+            ])
+            ->add('locationDetails',CollectionType::class,[
+                'entry_type' => LocationDetailType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => false
             ])
         ;
     }

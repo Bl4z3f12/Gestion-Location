@@ -52,7 +52,7 @@ class Location
     /**
      * @var Collection<int, LocationDetail>
      */
-    #[ORM\OneToMany(targetEntity: LocationDetail::class, mappedBy: 'location', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: LocationDetail::class, mappedBy: 'location', cascade: ['persist'], orphanRemoval: true)]
     private Collection $locationDetails;
 
     // Getters and setters...

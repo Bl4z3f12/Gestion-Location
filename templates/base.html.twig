@@ -6,7 +6,13 @@
         <title>{% block title %}Welcome!{% endblock %}</title>   
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         {% block stylesheets %}
+
             {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body class="hold-transition sidebar-mini">
@@ -16,17 +22,14 @@
                 {{ include('includes/_sidebar.html.twig') }}
             </aside>
             <div class="content-wrapper">
-                {% block body %}{% endblock %}
+                <section class="content">
+                    <div class="container-fluid mt-2">
+                        {% block body %}{% endblock %}
+                    </div>
+                </section>
             </div>
             <footer class="main-footer">
             </footer>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
     </body>
 </html>
