@@ -16,11 +16,19 @@ class LocationDetailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('product', EntityType::class, [
-                'class' => Product::class,
-            ])
-            ->add('quantity',IntegerType::class)
-        ;
+        ->add('product', EntityType::class, [
+            'class' => Product::class,
+            'choice_label' => 'name',
+            'label' => 'Product',
+            'required' => true,
+        ])
+        ->add('quantity', IntegerType::class, [
+            'label' => 'Quantity to reduce',
+            'required' => true,
+            'attr' => ['min' => 1],
+        ])
+
+    ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

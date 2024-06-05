@@ -12,6 +12,7 @@
             <table class="table" style="width: 100%;">
                 <thead>
                 <tr>
+                    <th>Client</th>
                     <th>Location Date</th>
                     <th>Return Date</th>
                     <th>Total Amount</th>
@@ -26,6 +27,7 @@
                 <tbody>
                 {% for location in locations %}
                     <tr>
+                        <td>{{ location.client}}</td>
                         <td>{{ location.locationDate ? location.locationDate|date('Y-m-d') : '' }}</td>
                         <td>{{ location.returnDate ? location.returnDate|date('Y-m-d') : '' }}</td>
                         <td>{{ location.totalAmount }}</td>
