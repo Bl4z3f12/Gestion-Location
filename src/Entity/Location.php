@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LocationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -47,6 +49,12 @@ class Location
     #[Assert\NotBlank]
     private ?\DateTimeInterface $createdAt = null;
 
+    /**
+     * @var Collection<int, LocationDetail>
+     */
+    #[ORM\OneToMany(targetEntity: LocationDetail::class, mappedBy: 'location', orphanRemoval: true)]
+    private Collection $locationDetails;
+
     // Getters and setters...
     public function __construct()
     {
@@ -55,6 +63,7 @@ class Location
         $this->setGuardPrice(100);
         $this->setCreatedAt(new \DateTimeImmutable());
         $this->setLocationDate(new \DateTimeImmutable());
+        $this->locationDetails = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,6 +167,36 @@ class Location
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LocationDetail>
+     */
+    public function getLocationDetails(): Collection
+    {
+        return $this->locationDetails;
+    }
+
+    public function addLocationDetail(LocationDetail $locationDetail): static
+    {
+        if (!$this->locationDetails->contains($locationDetail)) {
+            $this->locationDetails->add($locationDetail);
+            $locationDetail->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocationDetail(LocationDetail $locationDetail): static
+    {
+        if ($this->locationDetails->removeElement($locationDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($locationDetail->getLocation() === $this) {
+                $locationDetail->setLocation(null);
+            }
+        }
+
         return $this;
     }
 }

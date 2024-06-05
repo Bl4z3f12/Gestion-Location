@@ -18,6 +18,10 @@ class LocationDetail
     #[Assert\NotBlank]
     private ?int $quantity = null;
 
+    #[ORM\ManyToOne(inversedBy: 'locationDetails')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Location $location = null;
+
 
     public function getId(): ?int
     {
@@ -32,6 +36,18 @@ class LocationDetail
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): static
+    {
+        $this->location = $location;
+
         return $this;
     }
 }
