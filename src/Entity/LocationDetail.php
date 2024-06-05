@@ -22,6 +22,10 @@ class LocationDetail
     #[ORM\JoinColumn(nullable: false)]
     private ?Location $location = null;
 
+    #[ORM\ManyToOne(inversedBy: 'LocationDetail')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Product $product = null;
+
 
     public function getId(): ?int
     {
@@ -47,6 +51,18 @@ class LocationDetail
     public function setLocation(?Location $location): static
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): static
+    {
+        $this->product = $product;
 
         return $this;
     }

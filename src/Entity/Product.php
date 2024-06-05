@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -41,6 +43,17 @@ class Product
 
     #[ORM\Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeInterface $updatedAt = null;
+
+    /**
+     * @var Collection<int, LocationDetail>
+     */
+    #[ORM\OneToMany(targetEntity: LocationDetail::class, mappedBy: 'product')]
+    private Collection $LocationDetail;
+
+    public function __construct()
+    {
+        $this->LocationDetail = new ArrayCollection();
+    }
 
     // Getters and setters...
 
@@ -126,6 +139,36 @@ class Product
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LocationDetail>
+     */
+    public function getLocationDetail(): Collection
+    {
+        return $this->LocationDetail;
+    }
+
+    public function addLocationDetail(LocationDetail $locationDetail): static
+    {
+        if (!$this->LocationDetail->contains($locationDetail)) {
+            $this->LocationDetail->add($locationDetail);
+            $locationDetail->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocationDetail(LocationDetail $locationDetail): static
+    {
+        if ($this->LocationDetail->removeElement($locationDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($locationDetail->getProduct() === $this) {
+                $locationDetail->setProduct(null);
+            }
+        }
+
         return $this;
     }
 }
